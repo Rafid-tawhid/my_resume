@@ -12,6 +12,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
+        padding: EdgeInsets.all(40),
         children: [
           Row(
             children: [
@@ -21,8 +22,12 @@ class MyHomePage extends StatelessWidget {
               ClipOval(
                 child: Container(
                   width: 150.0, // Set the width of the circular image
-                  height: 150.0, // Set the height of the circular image
-                  child: Image.asset('images/photo.jpg'),
+                  height: 150.0,
+                  // decoration: BoxDecoration(
+                  //   borderRadius: BorderRadius.circular(20),
+                  //   border: Border.all(color: Colors.grey,width: 1)
+                  // ),// Set the height of the circular image
+                  child: Image.asset('images/photo.jpg',fit: BoxFit.contain,),
                 ),
               )
             ],
@@ -38,7 +43,7 @@ class MyHomePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     JobExperience(),
-                    SizedBox(height: 10,),
+                    SizedBox(height: 20,),
                     ProjectSection()
                   ],
                 ),
@@ -51,36 +56,11 @@ class MyHomePage extends StatelessWidget {
                   SizedBox(height: 20,),
                   SkillSection(),
                   SizedBox(height: 20,),
-                  Text(
-                    'Research Paper',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blueAccent,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 2,
-                  ),
-                  Container(
-                    color: Colors.blueAccent,
-                    width: 140,
-                    height: 2,
-                  ),
-                  SizedBox(height: 4,),
-                  Text('IoT based car and vehicle license\n checking System.'),
-                  SizedBox(height: 4,),
-                  InkWell(
-                      onTap: () async {
-                        const url = 'https://pub.dev/packages/url_launcher/install'; // Replace with your URL
-                        if (await canLaunchUrl(Uri.parse(url))) {
-                        await launchUrl(Uri.parse(url),webViewConfiguration: WebViewConfiguration(enableJavaScript: true
-                        ));
-                        } else {
-                        throw 'Could not launch $url';
-                        }
-                      },
-                      child: Text('Overleaf Link',style: TextStyle(decoration: TextDecoration.underline,color: Color(0xff6e009a),fontWeight: FontWeight.bold),))
+                  ResearchPaperSection(),
+                  SizedBox(height: 20,),
+                  PlaystoreAppSection(purpleColor: purpleColor),
+                  SizedBox(height: 20,),
+                  EducationSection()
                 ],
               )
             ],
@@ -92,34 +72,38 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
-  Column ProjectSection() {
-    return Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'PROJECTS',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.blueAccent,
+  Padding ProjectSection() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 20.0),
+      child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+
+            children: [
+              Text(
+                'PROJECTS',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueAccent,
+                ),
               ),
-            ),
-            SizedBox(
-              height: 2,
-            ),
-            Container(
-              color: Colors.blueAccent,
-              width: 120,
-              height: 2,
-            ),
-            SizedBox(height: 4,),
-            ...myProjectList.map((project) => Container(
-              child: ProjectItem(project),
-            ))
-          ],
-        );
+              SizedBox(
+                height: 2,
+              ),
+              Container(
+                color: Colors.blueAccent,
+                width: 120,
+                height: 2,
+              ),
+              SizedBox(height: 4,),
+              ...myProjectList.map((project) => Container(
+                child: ProjectItem(project),
+              ))
+            ],
+          ),
+    );
   }
 
   Column ProjectItem(ProjectInfo project) {
@@ -147,6 +131,179 @@ class MyHomePage extends StatelessWidget {
                   SizedBox(height: 4,)
                 ],
               );
+  }
+}
+
+class EducationSection extends StatelessWidget {
+  const EducationSection({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Education',
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.blueAccent,
+          ),
+        ),
+        SizedBox(
+          height: 2,
+        ),
+        Container(
+          color: Colors.blueAccent,
+          width: 110,
+          height: 2,
+        ),
+        SizedBox(height: 8,),
+        Text('Msc in CSE(Running)',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+        Text('Jagannath University',style: TextStyle(color: Colors.blueAccent),),
+        SizedBox(height: 4,),
+        Text('Bsc in CSE',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+        Text('Stamford University (Cgpa-3.70)',style: TextStyle(color: Colors.blueAccent),),
+        SizedBox(height: 4,),
+        Text('H.S.C',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+        Text('Bir Shrestha Munshi Abdur Rouf Public Collage\n(Cgpa-4.00)',style: TextStyle(color: Colors.blueAccent),),
+        SizedBox(height: 4,),
+        Text('S.S.C',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+        Text('Armanitola Govt. High School\n(Cgpa-5.00)',style: TextStyle(color: Colors.blueAccent),),
+      ],
+    );
+  }
+}
+
+class PlaystoreAppSection extends StatelessWidget {
+  const PlaystoreAppSection({
+    super.key,
+    required this.purpleColor,
+  });
+
+  final Color purpleColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Playstore Apps Link',
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.blueAccent,
+          ),
+        ),
+        SizedBox(
+          height: 2,
+        ),
+        Container(
+          color: Colors.blueAccent,
+          width: 200,
+          height: 2,
+        ),
+        SizedBox(height: 10,),
+        Row(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(3),
+                  border: Border.all(width: 1,color: Colors.grey)
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Text('Speed Meter',style: TextStyle(fontWeight: FontWeight.bold,color: purpleColor),),
+              ),
+            ),
+            SizedBox(width: 6,),
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(3),
+                  border: Border.all(width: 1,color: Colors.grey)
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Text('Remit(IOS)',style: TextStyle(fontWeight: FontWeight.bold,color: purpleColor),),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 6,),
+        Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(3),
+              border: Border.all(width: 1,color: Colors.grey)
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Text('Pencilbox Training Institute',style: TextStyle(fontWeight: FontWeight.bold,color: purpleColor),),
+          ),
+        ),
+        SizedBox(height: 6,),
+        Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(3),
+              border: Border.all(width: 1,color: Colors.grey)
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Text('Bitbirds Solution',style: TextStyle(fontWeight: FontWeight.bold,color: purpleColor),),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ResearchPaperSection extends StatelessWidget {
+  const ResearchPaperSection({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Research Paper',
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.blueAccent,
+          ),
+        ),
+        SizedBox(
+          height: 2,
+        ),
+        Container(
+          color: Colors.blueAccent,
+          width: 140,
+          height: 2,
+        ),
+        SizedBox(height: 4,),
+        Text('IoT based car and vehicle license\n checking System.'),
+        SizedBox(height: 4,),
+        InkWell(
+            onTap: () async {
+              const url = 'https://pub.dev/packages/url_launcher/install'; // Replace with your URL
+              if (await canLaunchUrl(Uri.parse(url))) {
+                await launchUrl(Uri.parse(url),webViewConfiguration: WebViewConfiguration(enableJavaScript: true
+                ));
+              } else {
+                throw 'Could not launch $url';
+              }
+            },
+            child: Text('Overleaf Link',style: TextStyle(decoration: TextDecoration.underline,color: Color(0xff6e009a),fontWeight: FontWeight.bold),))
+      ],
+    );
   }
 }
 
@@ -451,10 +608,13 @@ class ContactAndIntro extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        Text(
-          'I am Passionate to explore the latest technologies and software. Love to create Mobile Application with Flutter. I am a good soldier who can fight in any situation.',
-          style:
-              TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        Padding(
+          padding: const EdgeInsets.only(top: 20.0,bottom: 20),
+          child: Text(
+            'I am Passionate to explore the latest technologies and software. Love to create Mobile Application with Flutter. I am a good soldier who can fight in any situation.',
+            style:
+                TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
         )
       ],
     );
@@ -502,13 +662,13 @@ class JobExperience extends StatelessWidget {
         ),
         // SizedBox(height: 4,),
         Text('Flutter Developer',style: TextStyle(
-          fontSize: 18,
+          fontSize: 16,
           fontWeight: FontWeight.bold,
           color: Colors.blueAccent,
         ),),
         // SizedBox(height: 4,),
         Text('September 2021 - December 2022',style: TextStyle(
-          fontSize: 18,
+          fontSize: 14,
           fontWeight: FontWeight.bold,
           color: Colors.black54,
         ),),
@@ -523,13 +683,13 @@ class JobExperience extends StatelessWidget {
         ),
         // SizedBox(height: 4,),
         Text('Assistant Trainer of Mobile Application & Development (SEIP Project-T3)',style: TextStyle(
-          fontSize: 18,
+          fontSize: 16,
           fontWeight: FontWeight.bold,
           color: Colors.blueAccent,
         ),),
         // SizedBox(height: 4,),
         Text('September 2021 - December 2022',style: TextStyle(
-          fontSize: 18,
+          fontSize: 14,
           fontWeight: FontWeight.bold,
           color: Colors.black54,
         ),)
