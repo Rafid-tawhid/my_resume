@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:my_resume/project_list.dart';
 import 'package:my_resume/skill_tools.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+
+
 
 class MyHomePage extends StatelessWidget {
 
@@ -131,6 +135,20 @@ class MyHomePage extends StatelessWidget {
                   SizedBox(height: 4,)
                 ],
               );
+  }
+
+  pw.Document generatePDF() {
+    final pdf = pw.Document();
+
+    pdf.addPage(pw.Page(
+      build: (pw.Context context) {
+        return pw.Center(
+          child: pw.Text('Hello, Flutter to PDF!'),
+        );
+      },
+    ));
+
+    return pdf;
   }
 }
 
