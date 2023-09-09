@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:my_resume/project_list.dart';
 import 'package:my_resume/skill_tools.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
+
 
 class MyHomePage extends StatelessWidget {
 
