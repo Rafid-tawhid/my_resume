@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:my_resume/project_list.dart';
+import 'package:my_resume/skill_tools.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+
+  Color purpleColor=Color(0xff6e009a);
+   MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +47,12 @@ class MyHomePage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                 TrainingSection(),
+                  TrainingSection(),
+                  SizedBox(height: 20,),
+                  SkillSection(),
+                  SizedBox(height: 20,),
                   Text(
-                    'Skill & Tools',
+                    'Research Paper',
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -57,9 +64,23 @@ class MyHomePage extends StatelessWidget {
                   ),
                   Container(
                     color: Colors.blueAccent,
-                    width: 120,
+                    width: 140,
                     height: 2,
                   ),
+                  SizedBox(height: 4,),
+                  Text('IoT based car and vehicle license\n checking System.'),
+                  SizedBox(height: 4,),
+                  InkWell(
+                      onTap: () async {
+                        const url = 'https://pub.dev/packages/url_launcher/install'; // Replace with your URL
+                        if (await canLaunchUrl(Uri.parse(url))) {
+                        await launchUrl(Uri.parse(url),webViewConfiguration: WebViewConfiguration(enableJavaScript: true
+                        ));
+                        } else {
+                        throw 'Could not launch $url';
+                        }
+                      },
+                      child: Text('Overleaf Link',style: TextStyle(decoration: TextDecoration.underline,color: Color(0xff6e009a),fontWeight: FontWeight.bold),))
                 ],
               )
             ],
@@ -126,6 +147,113 @@ class MyHomePage extends StatelessWidget {
                   SizedBox(height: 4,)
                 ],
               );
+  }
+}
+
+class SkillSection extends StatelessWidget {
+  const SkillSection({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Skill & Tools',
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.blueAccent,
+          ),
+        ),
+        SizedBox(
+          height: 2,
+        ),
+        Container(
+          color: Colors.blueAccent,
+          width: 140,
+          height: 2,
+        ),
+        SizedBox(height: 6,),
+        ...mySkillList.map((skill) => Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                    width: 100,
+                    child: Text(skill.name)),
+                ...List.generate(6, (index) => Container(
+                  width: 20, // Adjust the size of the circle as needed
+                  height: 20, // Adjust the size of the circle as needed
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: index<skill.level?Colors.redAccent:Colors.white,
+                    border: Border.all(
+                      color: Colors.grey, // Border color
+                      width: 1.0, // Border width
+                    ),
+                  ),
+                )),
+              ],
+
+            ),
+            SizedBox(height: 2,)
+          ],
+        )),
+        SizedBox(height: 10,),
+        Flexible(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Text('Tools: ',style: TextStyle(fontWeight: FontWeight.bold),),
+              Text('Android Studio ,Postman, Xcode,\nAdmob, Playstore, Appstore, FCM.',style: TextStyle(fontWeight: FontWeight.bold,color: Color(0xff6e009a)),)
+            ],
+          ),
+        ),
+        SizedBox(height: 10,),
+        Row(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(3),
+                border: Border.all(width: 1,color: Colors.grey)
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Text('Communication'),
+              ),
+            ),
+            SizedBox(width: 6,),
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(3),
+                  border: Border.all(width: 1,color: Colors.grey)
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Text('Management'),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 6,),
+        Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(3),
+              border: Border.all(width: 1,color: Colors.grey)
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Text('Leadership'),
+          ),
+        ),
+      ],
+    );
   }
 }
 
