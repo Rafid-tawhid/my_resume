@@ -10,7 +10,7 @@ import 'package:pdf/widgets.dart' as pw;
 class MyHomePage extends StatelessWidget {
 
   Color purpleColor=Color(0xff6e009a);
-   MyHomePage({super.key});
+  MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -80,61 +80,61 @@ class MyHomePage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 20.0),
       child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
 
-            children: [
-              Text(
-                'PROJECTS',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blueAccent,
-                ),
-              ),
-              SizedBox(
-                height: 2,
-              ),
-              Container(
-                color: Colors.blueAccent,
-                width: 120,
-                height: 2,
-              ),
-              SizedBox(height: 4,),
-              ...myProjectList.map((project) => Container(
-                child: ProjectItem(project),
-              ))
-            ],
+        children: [
+          Text(
+            'PROJECTS',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Colors.blueAccent,
+            ),
           ),
+          SizedBox(
+            height: 2,
+          ),
+          Container(
+            color: Colors.blueAccent,
+            width: 120,
+            height: 2,
+          ),
+          SizedBox(height: 4,),
+          ...myProjectList.map((project) => Container(
+            child: ProjectItem(project),
+          ))
+        ],
+      ),
     );
   }
 
   Column ProjectItem(ProjectInfo project) {
     return Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(project.id.toString()+'.',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Color(
-                          0xff6e009a)),),
-                      SizedBox(width: 4,),
-                      Text(project.name,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Color(
-                          0xff6e009a))),
-                      SizedBox(width: 2,),
-                      Text('(${project.date})',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Color(
-                          0xff6e009a)))
-                    ],
-                  ),
-                  SizedBox(height: 2,),
-                  Text(project.tools),
-                  SizedBox(height: 2,),
-                  Text(project.details,style: TextStyle(color: Colors.black),),
-                  SizedBox(height: 4,)
-                ],
-              );
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(project.id.toString()+'.',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Color(
+                0xff6e009a)),),
+            SizedBox(width: 4,),
+            Text(project.name,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Color(
+                0xff6e009a))),
+            SizedBox(width: 2,),
+            Text('(${project.date})',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Color(
+                0xff6e009a)))
+          ],
+        ),
+        SizedBox(height: 2,),
+        Text(project.tools),
+        SizedBox(height: 2,),
+        Text(project.details,style: TextStyle(color: Colors.black),),
+        SizedBox(height: 4,)
+      ],
+    );
   }
 
   pw.Document generatePDF() {
@@ -395,8 +395,8 @@ class SkillSection extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(3),
-                border: Border.all(width: 1,color: Colors.grey)
+                  borderRadius: BorderRadius.circular(3),
+                  border: Border.all(width: 1,color: Colors.grey)
               ),
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
@@ -519,7 +519,7 @@ class ContactAndIntro extends StatelessWidget {
         Text(
           'Tawhidur Rahman Rafid',
           style:
-              TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
         SizedBox(
           height: 10,
@@ -631,7 +631,7 @@ class ContactAndIntro extends StatelessWidget {
           child: Text(
             'I am Passionate to explore the latest technologies and software. Love to create Mobile Application with Flutter. I am a good soldier who can fight in any situation.',
             style:
-                TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         )
       ],
